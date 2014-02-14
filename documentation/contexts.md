@@ -31,6 +31,8 @@ Here is an example of a change set using the context attribute:
 
 If you are managing your test data with Liquibase, the best way to include it is in-line with all your other changeSets, but marked with a "test" context. That way, when you want your test data inserted you can run the migrator with the "test" context. When it comes time to migrate your production database, don't include the "test" context, and your test data not be included. If you have multiple test environments or test data sets, simply tag them with different contexts such as "min-test", "integration-test", etc.
 
+*NOTE: to exclude "test" contexts when updating another database, such as production, you will need to pass at least one context flag. Otherwise it will run ALL contexts, including "test." You can pass a non-existent context flag, such as "prod", which will tell it to run all changes without context as well as any with the "prod" flag (which will probably be zero).*
+
 Using contexts to control test data is better than having a separate changeLog tree because later refactorings and changes will be applied to existing test data the same as they are applied to production data. If you had a set of test data that was created and simply added after the database is set up, you would be constantly manually updating your test data scripts to keep them in line with the current database schema.
 
 ## Multiple contexts per change set ##
