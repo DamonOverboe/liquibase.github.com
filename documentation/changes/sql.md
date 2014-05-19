@@ -32,7 +32,7 @@ Note: By default it will attempt to split statements on a ';' or 'go' at the end
 <table>
 <tr><th>Name</th><th>Description</th><th>Required&nbsp;For</th><th>Supports</th><th>Since</th></tr>
 <tr><td style='vertical-align: top'>comment</td><td style='vertical-align: top'></td><td style='vertical-align: top'></td><td style='vertical-align:top'>all</td><td style='vertical-align: top'></td></tr>
-<tr><td style='vertical-align: top'>dbms</td><td style='vertical-align: top'></td><td style='vertical-align: top'></td><td style='vertical-align:top'>all</td><td style='vertical-align: top'>3.0</td></tr>
+<tr><td style='vertical-align: top'>dbms</td><td style='vertical-align: top'>Attribute of 'sql' prior to 3.0; attribute to 'changeSet' since 3.0</td><td style='vertical-align: top'></td><td style='vertical-align:top'>all</td><td style='vertical-align: top'>3.0</td></tr>
 <tr><td style='vertical-align: top'>endDelimiter</td><td style='vertical-align: top'>Delimiter to apply to the end of the statement. Defaults to ';', may be set to ''.</td><td style='vertical-align: top'></td><td style='vertical-align:top'>all</td><td style='vertical-align: top'></td></tr>
 <tr><td style='vertical-align: top'>splitStatements</td><td style='vertical-align: top'>Set to false to not have liquibase split statements on ;'s and GO's. Defaults to true if not set</td><td style='vertical-align: top'></td><td style='vertical-align:top'>all</td><td style='vertical-align: top'></td></tr>
 <tr><td style='vertical-align: top'>sql</td><td style='vertical-align: top'></td><td style='vertical-align: top'>all</td><td style='vertical-align:top'>all</td><td style='vertical-align: top'></td></tr>
@@ -47,8 +47,8 @@ Note: By default it will attempt to split statements on a ';' or 'go' at the end
   </ul>
 <div id='tab-xml'>
 {% highlight xml %}
-<changeSet author="liquibase-docs" id="sql-example">
-    <sql dbms="h2, oracle"
+<changeSet author="liquibase-docs" id="sql-example" dbms="h2, oracle">
+    <sql
             endDelimiter="\nGO"
             splitStatements="true"
             stripComments="true">insert into person (name) values ('Bob')
@@ -62,10 +62,10 @@ Note: By default it will attempt to split statements on a ';' or 'go' at the end
 changeSet:
   id: sql-example
   author: liquibase-docs
+  dbms: h2, oracle
   changes:
   - sql:
       comment: What about Bob?
-      dbms: h2, oracle
       endDelimiter: \nGO
       splitStatements: true
       sql: insert into person (name) values ('Bob')
@@ -79,11 +79,11 @@ changeSet:
   "changeSet": {
     "id": "sql-example",
     "author": "liquibase-docs",
+    "dbms": "h2, oracle",
     "changes": [
       {
         "sql": {
           "comment": "What about Bob?",
-          "dbms": "h2, oracle",
           "endDelimiter": "\\nGO",
           "splitStatements": true,
           "sql": "insert into person (name) values ('Bob')",
